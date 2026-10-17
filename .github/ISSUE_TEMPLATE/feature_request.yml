@@ -1,0 +1,16 @@
+name: Feature or new solution
+description: Suggest an improvement or a new everyday problem to solve
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: The problem
+      description: Who has this problem and how often?
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: Your idea
+      description: How could an app help?

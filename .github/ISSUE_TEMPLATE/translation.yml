@@ -1,0 +1,16 @@
+name: Translation
+description: Report a translation mistake or ask for a new language
+labels: [i18n]
+body:
+  - type: input
+    id: language
+    attributes:
+      label: Language
+      placeholder: e.g. French, or a new language such as Urdu
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: Details
+      description: The current text, your suggested text, and where it appears.

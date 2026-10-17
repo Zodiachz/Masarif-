@@ -1,0 +1,22 @@
+{
+  "name": "everyday-solutions",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Small, private, multilingual web apps that solve everyday problems.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Zodiachz/new-project-.git"
+  },
+  "scripts": {
+    "start": "node scripts/serve.js 8080",
+    "test": "node --test \"expenses/tests/*.test.js\"",
+    "images": "node scripts/build-images.js"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "devDependencies": {
+    "playwright": "^1.48.0"
+  }
+}

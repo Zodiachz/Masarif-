@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Everyday Solutions</title>
+  <meta name="description" content="Small, private, multilingual web apps that solve problems many people face every day.">
+  <link rel="icon" href="expenses/icons/icon.svg" type="image/svg+xml">
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f4f5f7; --surface: #fff; --text: #161b26; --muted: #5d6578; --border: #e3e6ec;
+      --accent: #0f766e; --accent-text: #fff; --soft: #e3f4f1;
+      --font: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", "Noto Sans Arabic", Tahoma, sans-serif;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        color-scheme: dark;
+        --bg: #0f1218; --surface: #181c24; --text: #e8ebf1; --muted: #9aa3b5; --border: #2a303c;
+        --accent: #2dd4bf; --accent-text: #052522; --soft: #123a36;
+      }
+    }
+    :root[data-theme="dark"] {
+      color-scheme: dark;
+      --bg: #0f1218; --surface: #181c24; --text: #e8ebf1; --muted: #9aa3b5; --border: #2a303c;
+      --accent: #2dd4bf; --accent-text: #052522; --soft: #123a36;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font); line-height: 1.6; }
+    .wrap { max-width: 1040px; margin: 0 auto; padding: 0 16px; }
+    header { display: flex; justify-content: flex-end; padding: 16px 0; }
+    select { font: inherit; color: inherit; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 8px 12px; }
+    .hero { padding: 40px 0 32px; max-width: 720px; }
+    .hero h1 { font-size: clamp(2rem, 5vw, 3rem); line-height: 1.15; margin: 0 0 12px; letter-spacing: -0.02em; }
+    .hero p { font-size: 1.15rem; color: var(--muted); margin: 0; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; padding-bottom: 48px; }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 8px; }
+    .card .emoji { font-size: 1.8rem; }
+    .card h2 { font-size: 1.1rem; margin: 0; }
+    .card .problem { color: var(--muted); margin: 0; font-size: 0.95rem; flex: 1; }
+    .card a, .card .soon { align-self: flex-start; margin-top: 8px; border-radius: 10px; padding: 8px 14px; font-weight: 600; text-decoration: none; }
+    .card a { background: var(--accent); color: var(--accent-text); }
+    .card .soon { background: var(--soft); color: var(--text); font-weight: 500; }
+    .card.live { border-color: var(--accent); }
+    .values { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; padding-bottom: 48px; }
+    .values div { border-top: 2px solid var(--accent); padding-top: 12px; }
+    .values h3 { margin: 0 0 4px; font-size: 1rem; }
+    .values p { margin: 0; color: var(--muted); font-size: 0.95rem; }
+    footer { color: var(--muted); font-size: 0.9rem; padding: 24px 0 40px; border-top: 1px solid var(--border); }
+    footer a { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <select id="lang" aria-label="Language"></select>
+    </header>
+
+    <section class="hero">
+      <h1 data-t="title"></h1>
+      <p data-t="subtitle"></p>
+    </section>
+
+    <section class="grid">
+      <article class="card live">
+        <span class="emoji" aria-hidden="true">💸</span>
+        <h2 data-t="expenses.name"></h2>
+        <p class="problem" data-t="expenses.problem"></p>
+        <a href="expenses/" data-t="open"></a>
+      </article>
+      <article class="card">
+        <span class="emoji" aria-hidden="true">⏱️</span>
+        <h2 data-t="focus.name"></h2>
+        <p class="problem" data-t="focus.problem"></p>
+        <span class="soon" data-t="soon"></span>
+      </article>
+      <article class="card">
+        <span class="emoji" aria-hidden="true">💊</span>
+        <h2 data-t="meds.name"></h2>
+        <p class="problem" data-t="meds.problem"></p>
+        <span class="soon" data-t="soon"></span>
+      </article>
+      <article class="card">
+        <span class="emoji" aria-hidden="true">🧾</span>
+        <h2 data-t="split.name"></h2>
+        <p class="problem" data-t="split.problem"></p>
+        <span class="soon" data-t="soon"></span>
+      </article>
+    </section>
+
+    <section class="values">
+      <div><h3 data-t="v1.title"></h3><p data-t="v1.body"></p></div>
+      <div><h3 data-t="v2.title"></h3><p data-t="v2.body"></p></div>
+      <div><h3 data-t="v3.title"></h3><p data-t="v3.body"></p></div>
+    </section>
+
+    <footer>
+      <a href="https://github.com/Zodiachz/new-project-" rel="noopener">GitHub</a> · MIT License
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      var T = {
+        en: { name: 'English', title: 'Everyday problems, simple solutions', subtitle: 'Small web apps for problems many people face every day. Free, private, offline and available in 8 languages.', open: 'Open app', soon: 'Coming soon',
+          'expenses.name': 'Masarif — expense tracker', 'expenses.problem': 'Your salary runs out before the month ends and you don’t know where it went.',
+          'focus.name': 'Focus & habits', 'focus.problem': 'Procrastination and days that slip away without getting things done.',
+          'meds.name': 'Medication reminders', 'meds.problem': 'Forgetting doses and doctor appointments.',
+          'split.name': 'Bill splitting', 'split.problem': 'Working out who owes whom after trips, dinners and shared rent.',
+          'v1.title': 'Private by design', 'v1.body': 'Your data stays on your device. No accounts, no servers, no tracking.',
+          'v2.title': 'Works offline', 'v2.body': 'Install it on your phone or computer and use it without a connection.',
+          'v3.title': 'Your language', 'v3.body': 'Arabic, English, Spanish, French, German, Italian, Portuguese and Turkish.' },
+        ar: { name: 'العربية', title: 'مشاكل يومية، حلول بسيطة', subtitle: 'تطبيقات ويب صغيرة لمشاكل يعاني منها كثير من الناس كل يوم. مجانية وخاصة وتعمل بدون إنترنت وبـ 8 لغات.', open: 'افتح التطبيق', soon: 'قريبًا',
+          'expenses.name': 'مصاريفي — تنظيم المصاريف', 'expenses.problem': 'ينتهي راتبك قبل نهاية الشهر ولا تعرف أين ذهب.',
+          'focus.name': 'التركيز والعادات', 'focus.problem': 'التسويف وأيام تمضي دون إنجاز.',
+          'meds.name': 'تذكير الأدوية', 'meds.problem': 'نسيان الجرعات ومواعيد الطبيب.',
+          'split.name': 'تقسيم الفواتير', 'split.problem': 'حساب من يدين لمن بعد السفرات والعزائم والسكن المشترك.',
+          'v1.title': 'الخصوصية أولًا', 'v1.body': 'بياناتك تبقى على جهازك. بلا حسابات ولا خوادم ولا تتبّع.',
+          'v2.title': 'يعمل بدون إنترنت', 'v2.body': 'ثبّته على هاتفك أو حاسوبك واستخدمه بدون اتصال.',
+          'v3.title': 'بلغتك', 'v3.body': 'العربية والإنجليزية والإسبانية والفرنسية والألمانية والإيطالية والبرتغالية والتركية.' },
+        es: { name: 'Español', title: 'Problemas cotidianos, soluciones sencillas', subtitle: 'Pequeñas apps web para problemas que mucha gente tiene a diario. Gratis, privadas, sin conexión y en 8 idiomas.', open: 'Abrir app', soon: 'Próximamente',
+          'expenses.name': 'Masarif — control de gastos', 'expenses.problem': 'El sueldo se acaba antes de fin de mes y no sabes en qué se fue.',
+          'focus.name': 'Enfoque y hábitos', 'focus.problem': 'La procrastinación y los días que pasan sin avanzar.',
+          'meds.name': 'Recordatorio de medicinas', 'meds.problem': 'Olvidar dosis y citas médicas.',
+          'split.name': 'Dividir cuentas', 'split.problem': 'Saber quién debe a quién tras viajes, cenas y alquiler compartido.',
+          'v1.title': 'Privada por diseño', 'v1.body': 'Tus datos se quedan en tu dispositivo. Sin cuentas, sin servidores, sin rastreo.',
+          'v2.title': 'Funciona sin conexión', 'v2.body': 'Instálala en tu móvil u ordenador y úsala sin internet.',
+          'v3.title': 'En tu idioma', 'v3.body': 'Árabe, inglés, español, francés, alemán, italiano, portugués y turco.' },
+        fr: { name: 'Français', title: 'Problèmes du quotidien, solutions simples', subtitle: 'De petites applis web pour des problèmes que beaucoup rencontrent chaque jour. Gratuites, privées, hors ligne et en 8 langues.', open: 'Ouvrir l’app', soon: 'Bientôt',
+          'expenses.name': 'Masarif — suivi des dépenses', 'expenses.problem': 'Le salaire file avant la fin du mois et vous ne savez pas où il est passé.',
+          'focus.name': 'Concentration et habitudes', 'focus.problem': 'La procrastination et les journées qui filent sans rien accomplir.',
+          'meds.name': 'Rappels de médicaments', 'meds.problem': 'Oublier ses prises et ses rendez-vous médicaux.',
+          'split.name': 'Partage des dépenses', 'split.problem': 'Savoir qui doit quoi à qui après un voyage, un dîner ou une colocation.',
+          'v1.title': 'Confidentiel par conception', 'v1.body': 'Vos données restent sur votre appareil. Sans compte, sans serveur, sans pistage.',
+          'v2.title': 'Fonctionne hors ligne', 'v2.body': 'Installez-la sur votre téléphone ou ordinateur et utilisez-la sans connexion.',
+          'v3.title': 'Dans votre langue', 'v3.body': 'Arabe, anglais, espagnol, français, allemand, italien, portugais et turc.' },
+        de: { name: 'Deutsch', title: 'Alltagsprobleme, einfache Lösungen', subtitle: 'Kleine Web-Apps für Probleme, die viele Menschen täglich haben. Kostenlos, privat, offline und in 8 Sprachen.', open: 'App öffnen', soon: 'Demnächst',
+          'expenses.name': 'Masarif – Ausgaben im Blick', 'expenses.problem': 'Das Gehalt ist vor Monatsende weg und Sie wissen nicht, wohin.',
+          'focus.name': 'Fokus & Gewohnheiten', 'focus.problem': 'Aufschieben und Tage, die ohne Ergebnis vergehen.',
+          'meds.name': 'Medikamenten-Erinnerung', 'meds.problem': 'Vergessene Einnahmen und Arzttermine.',
+          'split.name': 'Kosten teilen', 'split.problem': 'Wer schuldet wem was nach Reisen, Essen und gemeinsamer Miete?',
+          'v1.title': 'Privat von Anfang an', 'v1.body': 'Ihre Daten bleiben auf Ihrem Gerät. Kein Konto, kein Server, kein Tracking.',
+          'v2.title': 'Funktioniert offline', 'v2.body': 'Auf Handy oder Computer installieren und ohne Verbindung nutzen.',
+          'v3.title': 'In Ihrer Sprache', 'v3.body': 'Arabisch, Englisch, Spanisch, Französisch, Deutsch, Italienisch, Portugiesisch und Türkisch.' },
+        it: { name: 'Italiano', title: 'Problemi quotidiani, soluzioni semplici', subtitle: 'Piccole app web per problemi che molte persone affrontano ogni giorno. Gratuite, private, offline e in 8 lingue.', open: 'Apri l’app', soon: 'In arrivo',
+          'expenses.name': 'Masarif — gestione spese', 'expenses.problem': 'Lo stipendio finisce prima della fine del mese e non sai dove sia andato.',
+          'focus.name': 'Concentrazione e abitudini', 'focus.problem': 'La procrastinazione e le giornate che passano senza concludere nulla.',
+          'meds.name': 'Promemoria farmaci', 'meds.problem': 'Dimenticare le dosi e le visite mediche.',
+          'split.name': 'Dividere le spese', 'split.problem': 'Capire chi deve cosa a chi dopo viaggi, cene e affitto condiviso.',
+          'v1.title': 'Privata per scelta', 'v1.body': 'I tuoi dati restano sul tuo dispositivo. Niente account, server o tracciamento.',
+          'v2.title': 'Funziona offline', 'v2.body': 'Installala su telefono o computer e usala senza connessione.',
+          'v3.title': 'Nella tua lingua', 'v3.body': 'Arabo, inglese, spagnolo, francese, tedesco, italiano, portoghese e turco.' },
+        pt: { name: 'Português', title: 'Problemas do dia a dia, soluções simples', subtitle: 'Pequenos apps web para problemas que muita gente enfrenta todos os dias. Gratuitos, privados, offline e em 8 idiomas.', open: 'Abrir app', soon: 'Em breve',
+          'expenses.name': 'Masarif — controle de gastos', 'expenses.problem': 'O salário acaba antes do fim do mês e você não sabe para onde foi.',
+          'focus.name': 'Foco e hábitos', 'focus.problem': 'A procrastinação e os dias que passam sem render.',
+          'meds.name': 'Lembrete de remédios', 'meds.problem': 'Esquecer doses e consultas médicas.',
+          'split.name': 'Dividir contas', 'split.problem': 'Saber quem deve a quem depois de viagens, jantares e aluguel dividido.',
+          'v1.title': 'Privado por padrão', 'v1.body': 'Seus dados ficam no seu dispositivo. Sem contas, sem servidores, sem rastreamento.',
+          'v2.title': 'Funciona offline', 'v2.body': 'Instale no celular ou computador e use sem conexão.',
+          'v3.title': 'No seu idioma', 'v3.body': 'Árabe, inglês, espanhol, francês, alemão, italiano, português e turco.' },
+        tr: { name: 'Türkçe', title: 'Günlük sorunlar, basit çözümler', subtitle: 'Pek çok insanın her gün yaşadığı sorunlar için küçük web uygulamaları. Ücretsiz, gizli, çevrimdışı ve 8 dilde.', open: 'Uygulamayı aç', soon: 'Yakında',
+          'expenses.name': 'Masarif — harcama takibi', 'expenses.problem': 'Maaş ay bitmeden tükeniyor ve nereye gittiğini bilmiyorsunuz.',
+          'focus.name': 'Odak ve alışkanlıklar', 'focus.problem': 'Erteleme ve hiçbir şey yapılmadan geçen günler.',
+          'meds.name': 'İlaç hatırlatıcı', 'meds.problem': 'İlaç dozlarını ve doktor randevularını unutmak.',
+          'split.name': 'Hesap bölüşme', 'split.problem': 'Gezi, yemek ve ortak kiradan sonra kimin kime borçlu olduğunu bulmak.',
+          'v1.title': 'Tasarımdan gizli', 'v1.body': 'Verileriniz cihazınızda kalır. Hesap yok, sunucu yok, izleme yok.',
+          'v2.title': 'Çevrimdışı çalışır', 'v2.body': 'Telefonunuza veya bilgisayarınıza yükleyin, bağlantısız kullanın.',
+          'v3.title': 'Kendi dilinizde', 'v3.body': 'Arapça, İngilizce, İspanyolca, Fransızca, Almanca, İtalyanca, Portekizce ve Türkçe.' },
+      };
+      var KEY = 'everyday.lang';
+      var select = document.getElementById('lang');
+      Object.keys(T).forEach(function (code) {
+        var o = document.createElement('option');
+        o.value = code;
+        o.textContent = T[code].name;
+        select.appendChild(o);
+      });
+      function detect() {
+        try { var saved = localStorage.getItem(KEY); if (saved && T[saved]) return saved; } catch (e) {}
+        var prefs = navigator.languages || [navigator.language];
+        for (var i = 0; i < prefs.length; i++) { var base = String(prefs[i]).toLowerCase().split('-')[0]; if (T[base]) return base; }
+        return 'en';
+      }
+      function apply(code) {
+        var d = T[code];
+        document.documentElement.lang = code;
+        document.documentElement.dir = code === 'ar' ? 'rtl' : 'ltr';
+        document.title = d.title;
+        select.value = code;
+        document.querySelectorAll('[data-t]').forEach(function (el) { el.textContent = d[el.dataset.t] || T.en[el.dataset.t]; });
+      }
+      select.addEventListener('change', function () {
+        try { localStorage.setItem(KEY, select.value); } catch (e) {}
+        apply(select.value);
+      });
+      apply(detect());
+    })();
+  </script>
+</body>
+</html>
