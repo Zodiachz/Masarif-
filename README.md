@@ -13,7 +13,9 @@ Free · private · offline · 8 languages
 ![Dependencies](https://img.shields.io/badge/runtime%20dependencies-0-15803d.svg)
 ![PWA](https://img.shields.io/badge/PWA-offline%20ready-eb6834.svg)
 
-[**Live demo**](https://zodiachz.github.io/new-project-/) · [العربية](README.ar.md) · [Contributing](CONTRIBUTING.md) · [Changelog](CHANGELOG.md)
+### 🌐 [zodiachz.github.io/new-project-](https://zodiachz.github.io/new-project-/)
+
+[العربية](README.ar.md) · [Contributing](CONTRIBUTING.md) · [Changelog](CHANGELOG.md)
 
 </div>
 
@@ -90,6 +92,14 @@ Missing yours? Adding a language is a single file — see [CONTRIBUTING.md](CONT
 ## 🚀 Getting started
 
 **Use it online:** open the [live demo](https://zodiachz.github.io/new-project-/expenses/) and, if you like, install it from the browser menu (“Install app” / “Add to Home screen”).
+
+### 📴 Works without internet
+
+1. Open the app **once** while online — it saves itself on your device.
+2. Optional: install it (browser menu → **Install app** or **Add to Home screen**) to get an icon like a normal app.
+3. From then on it opens and works **fully offline**: adding, editing, charts, tips, backups. Your data is stored on the device, so nothing is lost without a connection.
+
+Updates download automatically the next time you are online.
 
 **Run it locally:** there is nothing to build or install.
 
